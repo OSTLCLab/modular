@@ -3,7 +3,6 @@
 
 #include <framework/Communication.h>
 #include <string>
-#include <cbor.hpp>
 #include <array>
 #include <vector>
 
