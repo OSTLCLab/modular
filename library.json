@@ -1,0 +1,28 @@
+{
+    "name": "Modular",
+    "version": "0.1.0",
+    "description": "A simple framework to organize arduino compatible embedded software and make components reusable.",
+    "keywords": "planet, happiness, people",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/OSTLCLab/modular"
+    },
+    "authors": [
+        {
+            "name": "Felix Nyffenegger",
+            "email": "felix.nyffenegger@ost.ch",
+            "url": "https://www.ost.ch/en/person/felix-nyffenegger-8671",
+            "maintainer": true
+        },
+        {
+            "name": "Samuel Helbling",
+            "email": "samy4sam@icloud.com"
+        }
+    ],
+    "license": "MIT",
+    "homepage": "https://github.com/OSTLCLab/modular",
+    "dependencies": {
+    },
+    "frameworks": "arduino",
+    "platforms": "*"
+}
