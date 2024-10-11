@@ -4,9 +4,6 @@
 
 using namespace modular;
 
-platform::generic::ReturnSensor<filter::Statistics<float>> sensor;
-filter::Statistics<float> reference = {0};
-
 void setUp(void) {
     // set stuff up here
 }
@@ -17,21 +14,23 @@ void tearDown(void) {
 
 // test the sensor get function 
 void test_sensor_measure(void) {
+    platform::generic::ReturnSensor<float> sensor;
     sensor.setSensorValue(5);
     sensor.measure();
-    TEST_ASSERT_EQUAL(5, sensor.getValue().last);
+    TEST_ASSERT_EQUAL(5, sensor.getValue());
 }
 
 void test_sensor_reset(void) {
+    platform::generic::ReturnSensor<float> sensor;
     sensor.setSensorValue(5);
     sensor.measure();
     sensor.reset();
-    TEST_ASSERT_EQUAL(0, sensor.getValue().last);
+    TEST_ASSERT_EQUAL(0, sensor.getValue());
 }
 
 void test_sensor_filter(void) {
+    platform::generic::ReturnSensor<filter::Statistics<float>> sensor;
     filter::StatisticsFilter<float> filter;
-    filter::Statistics<float> reference = {0};
     TEST_ASSERT_EQUAL(true, sensor.addFilter(filter));
     sensor.setSensorValue(1);
     sensor.measure();

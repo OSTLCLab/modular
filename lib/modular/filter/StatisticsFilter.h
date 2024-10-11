@@ -15,13 +15,21 @@ namespace modular::filter {
         T last = T(0);
         float m2 = 0;
         float var = 0;
+        void reset() {
+            min = T(0);
+            max = T(0);
+            avg = T(0);
+            last = T(0);
+            m2 = 0;
+            var = 0;
+        }
     };
 
     template <typename ST>
 
     class StatisticsFilter : public modular::Filter<ST, Statistics<ST>> {
         public:
-            virtual Statistics<ST> filter(Statistics<ST> &val, ST newValue) {
+            virtual Statistics<ST> filter(Statistics<ST> &val, ST newValue) override {
                 val.min = std::min(val.min, newValue);
                 val.max = std::max(val.max, newValue);
                 float delta = newValue - val.avg;
@@ -34,14 +42,8 @@ namespace modular::filter {
                 return val;     
             };
 
-            virtual void reset(Statistics<ST> &val) {
-                val.min = 0;
-                val.max = 0;
-                val.avg = 0;
-                val.last = 0;
-                val.m2 = 0;
-                val.var = 0;
-                count = 0;
+            virtual void reset(Statistics<ST> &val) override {
+                val.reset();
             };
 
             int getNumberOfMeasurements() { 

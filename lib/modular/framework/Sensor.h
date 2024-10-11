@@ -13,7 +13,16 @@ namespace modular {
             Sensor() {
 
             };
-            virtual void measure() { };
+            
+            void measure() {
+                SENSOR_READ_TYPE sensorValue = readSensor();
+                if (hasFilter) {
+                    value = filter.filter(value, sensorValue);
+                } else {
+                    value = VALUE_TYPE{sensorValue};
+                }
+            };
+
             VALUE_TYPE getValue() {
                 return value;
             }
@@ -24,18 +33,25 @@ namespace modular {
              */
             bool addFilter(Filter<SENSOR_READ_TYPE, VALUE_TYPE> &f) {
                 filter = f;
+                hasFilter = true;
                 return true;
             };
 
-            virtual void reset() {
-                // if filter -> resset filters
-                // else reset value to 0 by default
-                // if value is a struct, reset must be implemented subclass
-                //value = VALUE_TYPE(0);
+            void reset() {
+                if (hasFilter) {
+                    this->filter.reset(this->value);
+                } else {
+                    value = VALUE_TYPE{0};
+                }
             };
 
         protected:
+            virtual SENSOR_READ_TYPE readSensor() {
+                return SENSOR_READ_TYPE(0);
+            };
             VALUE_TYPE value;
             Filter<SENSOR_READ_TYPE, VALUE_TYPE> filter;
+        private:
+            bool hasFilter = false;
     };
 }

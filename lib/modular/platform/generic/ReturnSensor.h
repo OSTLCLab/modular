@@ -15,12 +15,11 @@ namespace modular::platform::generic {
         public:
             void setSensorValue(float val) {
                 sensorValue = val;
-            }
-            virtual void measure() override {
-                this->value = this->filter.filter(this->value, sensorValue);
-            }
-            virtual void reset() override {
-                this->filter.reset(this->value);
+            };
+
+        protected:
+            virtual float readSensor() override {
+                return sensorValue;
             };
         private:
             float sensorValue;
