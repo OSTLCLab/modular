@@ -10,9 +10,7 @@ namespace modular {
 
     class Sensor {
         public:
-            Sensor() {
-
-            };
+            Sensor() {};
             
             void measure() {
                 SENSOR_READ_TYPE sensorValue = readSensor();

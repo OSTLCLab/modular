@@ -9,14 +9,6 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "C/C++ Runner: Debug Session",
-            "type": "lldb",
-            "request": "launch",
-            "args": [],
-            "cwd": "/Users/nyfelix/dev/modular/src",
-            "program": "/Users/nyfelix/dev/modular/src/build/Debug/outDebug"
-        },
-        {
             "type": "platformio-debug",
             "request": "launch",
             "name": "PIO Debug",
