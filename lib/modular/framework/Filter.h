@@ -10,9 +10,7 @@ namespace modular {
     {
     public:
         virtual void reset(FILTER_OUTPUT &val) {};
-        virtual FILTER_OUTPUT filter(FILTER_OUTPUT &val, FILTER_INPUT newValue) {
-            return val;
-        };
+        virtual FILTER_OUTPUT filter(FILTER_OUTPUT &val, FILTER_INPUT newValue) = 0;
         const char* getType() {
             return typeid(FILTER_OUTPUT).name();
         };

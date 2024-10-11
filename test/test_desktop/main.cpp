@@ -39,7 +39,6 @@ void test_sensor_filter(void) {
     sensor.setSensorValue(3);
     sensor.measure();
 
-    printf("min: %f, max: %f, avg: %f\n", sensor.getValue().min, sensor.getValue().max, sensor.getValue().avg);
     TEST_ASSERT_EQUAL(1, sensor.getValue().min);
     TEST_ASSERT_EQUAL(3, sensor.getValue().max);
     TEST_ASSERT_EQUAL(2, sensor.getValue().avg);

@@ -9,6 +9,26 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "(lldb) Starten",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "/Users/nyfelix/dev/modular/.pio/build/native/program",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "lldb"
+        },
+        {
+            "name": "C/C++ Runner: Debug Session",
+            "type": "lldb",
+            "request": "launch",
+            "args": [],
+            "cwd": "/Users/nyfelix/dev/modular/test/test_desktop",
+            "program": "/Users/nyfelix/dev/modular/test/test_desktop/build/Debug/outDebug"
+        },
+        {
             "type": "platformio-debug",
             "request": "launch",
             "name": "PIO Debug",

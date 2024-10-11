@@ -15,7 +15,7 @@ namespace modular {
             void measure() {
                 SENSOR_READ_TYPE sensorValue = readSensor();
                 if (hasFilter) {
-                    value = filter.filter(value, sensorValue);
+                    value = filter->filter(value, sensorValue);
                 } else {
                     value = VALUE_TYPE{sensorValue};
                 }
@@ -30,14 +30,14 @@ namespace modular {
              * then one filter at a time. So I stick to mantra of this framework and keep it simple.
              */
             bool addFilter(Filter<SENSOR_READ_TYPE, VALUE_TYPE> &f) {
-                filter = f;
+                filter = &f;
                 hasFilter = true;
                 return true;
             };
 
             void reset() {
                 if (hasFilter) {
-                    this->filter.reset(this->value);
+                    this->filter->reset(this->value);
                 } else {
                     value = VALUE_TYPE{0};
                 }
@@ -48,7 +48,7 @@ namespace modular {
                 return SENSOR_READ_TYPE(0);
             };
             VALUE_TYPE value;
-            Filter<SENSOR_READ_TYPE, VALUE_TYPE> filter;
+            Filter<SENSOR_READ_TYPE, VALUE_TYPE>* filter;
         private:
             bool hasFilter = false;
     };

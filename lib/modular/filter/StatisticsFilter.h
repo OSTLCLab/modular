@@ -30,14 +30,23 @@ namespace modular::filter {
     class StatisticsFilter : public modular::Filter<ST, Statistics<ST>> {
         public:
             virtual Statistics<ST> filter(Statistics<ST> &val, ST newValue) override {
-                val.min = std::min(val.min, newValue);
-                val.max = std::max(val.max, newValue);
-                float delta = newValue - val.avg;
-                val.avg += delta / (count + 1);
-                float delta2 = newValue - val.avg;
-                val.m2 += delta * delta2;
-                val.var = val.m2 / (count + 1);   
-                val.last = newValue;
+                if (count == 0) {
+                    val.min = newValue;
+                    val.max = newValue;
+                    val.avg = newValue;
+                    val.last = newValue;
+                    val.m2 = 0;
+                    val.var = 0;
+                } else {
+                    val.min = std::min(val.min, newValue);
+                    val.max = std::max(val.max, newValue);
+                    float delta = newValue - val.avg;
+                    val.avg += delta / (count + 1);
+                    float delta2 = newValue - val.avg;
+                    val.m2 += delta * delta2;
+                    val.var = val.m2 / (count + 1);   
+                    val.last = newValue;
+                }
                 count++;
                 return val;     
             };
