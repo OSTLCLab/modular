@@ -1,39 +1,37 @@
-//
-// !!! WARNING !!! AUTO-GENERATED FILE!
-// PLEASE DO NOT MODIFY IT AND USE "platformio.ini":
-// https://docs.platformio.org/page/projectconf/section_env_build.html#build-flags
-//
 {
-    "configurations": [
-        {
-            "name": "PlatformIO",
-            "includePath": [
-                "/Users/nyfelix/dev/modular/include",
-                "/Users/nyfelix/dev/modular/src",
-                "/Users/nyfelix/dev/modular/lib/modular",
-                "/Users/nyfelix/dev/modular/.pio/libdeps/native/Unity/src",
-                ""
-            ],
-            "browse": {
-                "limitSymbolsToIncludedHeaders": true,
-                "path": [
-                    "/Users/nyfelix/dev/modular/include",
-                    "/Users/nyfelix/dev/modular/src",
-                    "/Users/nyfelix/dev/modular/lib/modular",
-                    "/Users/nyfelix/dev/modular/.pio/libdeps/native/Unity/src",
-                    ""
-                ]
-            },
-            "defines": [
-                "PLATFORMIO=60116",
-                ""
-            ],
-            "cppStandard": "gnu++17",
-            "compilerPath": "/usr/bin/gcc",
-            "compilerArgs": [
-                ""
-            ]
-        }
-    ],
-    "version": 4
+  "configurations": [
+    {
+      "name": "macos-gcc-x64",
+      "includePath": [
+        "${workspaceFolder}/**",
+        "/Users/nyfelix/dev/modular/include",
+        "/Users/nyfelix/dev/modular/src",
+        "/Users/nyfelix/dev/modular/lib/modular",
+        "/Users/nyfelix/dev/modular/.pio/libdeps/native/Unity/src",
+        ""
+      ],
+      "browse": {
+        "limitSymbolsToIncludedHeaders": true,
+        "path": [
+          "/Users/nyfelix/dev/modular/include",
+          "/Users/nyfelix/dev/modular/src",
+          "/Users/nyfelix/dev/modular/lib/modular",
+          "/Users/nyfelix/dev/modular/.pio/libdeps/native/Unity/src",
+          ""
+        ]
+      },
+      "defines": [
+        "PLATFORMIO=60116",
+        ""
+      ],
+      "cppStandard": "gnu++17",
+      "compilerPath": "/usr/bin/gcc",
+      "compilerArgs": [
+        ""
+      ],
+      "cStandard": "${default}",
+      "intelliSenseMode": "macos-gcc-x64"
+    }
+  ],
+  "version": 4
 }
