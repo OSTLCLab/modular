@@ -1,8 +1,11 @@
-#include "platform/generic/ReturnSensor.h"
+#include "platform/generic/TestReturnSensor.h"
+#include "platform/generic/TestReturnTimeSensor.h"
+#include "platform/generic/TestTimeManager.h"
+
 #include "filter/StatisticsFilter.h"
 #include <unity.h>
 
-using namespace modular;
+namespace platform = modular::platform::generic;
 
 void setUp(void) {
     // set stuff up here
@@ -14,24 +17,24 @@ void tearDown(void) {
 
 // test the sensor get function 
 void test_sensor_measure(void) {
-    platform::generic::ReturnSensor<float> sensor;
+    platform::TestReturnSensor sensor;
     sensor.setSensorValue(5);
     sensor.measure();
-    TEST_ASSERT_EQUAL(5, sensor.getValue());
+    TEST_ASSERT_EQUAL(5, sensor.getValue().current);
 }
 
 void test_sensor_reset(void) {
-    platform::generic::ReturnSensor<float> sensor;
+    platform::TestReturnSensor sensor;
     sensor.setSensorValue(5);
     sensor.measure();
     sensor.reset();
-    TEST_ASSERT_EQUAL(0, sensor.getValue());
+    TEST_ASSERT_EQUAL(0, sensor.getValue().current);
 }
 
 void test_sensor_filter(void) {
-    platform::generic::ReturnSensor<filter::Statistics<float>> sensor;
-    filter::StatisticsFilter<float> filter;
-    TEST_ASSERT_EQUAL(true, sensor.addFilter(filter));
+    platform::TestReturnSensor sensor;
+    modular::filter::StatisticsFilter<float> filter;
+    TEST_ASSERT_EQUAL(true, sensor.setFilter(filter));
     sensor.setSensorValue(1);
     sensor.measure();
     sensor.setSensorValue(2);
@@ -44,13 +47,21 @@ void test_sensor_filter(void) {
     TEST_ASSERT_EQUAL(2, sensor.getValue().avg);
 }
 
-// Test Statistics filter   sensor.setSensorValue(5);
+void test_time_manager(void) {
+    platform::TestTimeManager t{};
+    platform::TestReturnTimeSensor sensor{t};
+    sensor.setSensorValue(5);
+    sensor.measure();
+    platform::TimeValue v = sensor.getValue();
+    TEST_ASSERT_EQUAL(1, v.timestamp);
+}   
 
 int main(int argc, char **argv) {
     UNITY_BEGIN();
     RUN_TEST(test_sensor_measure);
     RUN_TEST(test_sensor_reset);
     RUN_TEST(test_sensor_filter);
+    RUN_TEST(test_time_manager);
     UNITY_END();
     return 0;
 }

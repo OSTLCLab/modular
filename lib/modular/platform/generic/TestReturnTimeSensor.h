@@ -5,14 +5,22 @@
 
 #pragma once
 
-#include "framework/Sensor.h"
+#include "framework/TimeSensor.h"
+#include "filter/StatisticsFilter.h"
 
 namespace modular::platform::generic {
 
-    template <typename VTYPE>
+    struct TimeValue {
+        TimeValue(float val) : value{val}, timestamp{0} {};
+        float value;
+        int timestamp;
+    };
 
-    class ReturnSensor : public Sensor<VTYPE, float> {
+    class TestReturnTimeSensor : public TimeSensor<TimeValue, float, int> {
         public:
+            TestReturnTimeSensor(TestTimeManager &tm) : TimeSensor<TimeValue, float, int>(tm) {
+
+            }
             void setSensorValue(float val) {
                 sensorValue = val;
             };
