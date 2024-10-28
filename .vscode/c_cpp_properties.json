@@ -10,7 +10,6 @@
             "includePath": [
                 "/Users/nyfelix/dev/modular/include",
                 "/Users/nyfelix/dev/modular/src",
-                "/Users/nyfelix/dev/modular/lib/modular",
                 "/Users/nyfelix/dev/modular/.pio/libdeps/native/Unity/src",
                 ""
             ],
@@ -19,7 +18,6 @@
                 "path": [
                     "/Users/nyfelix/dev/modular/include",
                     "/Users/nyfelix/dev/modular/src",
-                    "/Users/nyfelix/dev/modular/lib/modular",
                     "/Users/nyfelix/dev/modular/.pio/libdeps/native/Unity/src",
                     ""
                 ]
