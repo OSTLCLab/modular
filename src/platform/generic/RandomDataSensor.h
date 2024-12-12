@@ -5,7 +5,7 @@
 
 namespace modular::platform::generic {
 
-class RandomDataSensor : public Sensor<modular::filter::Statistics<float>, float> {
+class RandomDataSensor : public Sensor<modular::filter::Statistics<float>> {
     public:
         RandomDataSensor(int rangeMin, int rangeMax);
         virtual void measure();

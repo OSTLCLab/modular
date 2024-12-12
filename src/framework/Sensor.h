@@ -13,17 +13,12 @@ namespace modular {
      */
 
 
-    template <typename VALUE_TYPE, typename SENSOR_READ_TYPE>
+    template <typename VALUE_TYPE>
 
     class Sensor {
         public:            
             virtual void measure() {
-                SENSOR_READ_TYPE sensorValue = readSensor();
-                if (hasFilter) {
-                    value = filter->filter(value, sensorValue);
-                } else {
-                    value = VALUE_TYPE(sensorValue);
-                }
+                value = readSensor();
             };
 
             VALUE_TYPE getValue() {
@@ -32,26 +27,19 @@ namespace modular {
 
             /* Considerations about filters. In theory we could apply a pipes and filters pattern, here.
              * And maybe sometime in future it will be done. However, in real life I hardly every use more
-             * then one filter at a time. So I stick to mantra of this framework and keep it simple.
+             * then one filter at a time and abstracting filter chains is a bit overkill.
+             * This framework, for  now, offers filters, but they must be implemented in the sensor implementation class.
              */
-            bool setFilter(Filter<SENSOR_READ_TYPE, VALUE_TYPE> &f) {
-                // we could compare the type of the filter with the type of the sensor here
-                filter = &f;
-                hasFilter = true;
-                return true;
-            };
 
-            void reset() {
-                value = VALUE_TYPE(0);
+
+            virtual void reset() {
+                value = VALUE_TYPE {};
             };
 
         protected:
-            virtual SENSOR_READ_TYPE readSensor() {
-                return SENSOR_READ_TYPE(0);
+            virtual VALUE_TYPE readSensor() {
+                return VALUE_TYPE {};
             };
-            VALUE_TYPE value{0};
-            Filter<SENSOR_READ_TYPE, VALUE_TYPE> *filter;
-            bool hasFilter = false;
-
+            VALUE_TYPE value = VALUE_TYPE {};
     };
 }

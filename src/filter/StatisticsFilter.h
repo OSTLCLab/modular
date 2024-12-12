@@ -9,14 +9,13 @@ namespace modular::filter {
     template <typename T>
 
     struct Statistics {
-        Statistics(T initValue) : min(initValue), max(initValue), avg(initValue), current(initValue) {};
         T min = T(0);
         T max = T(0);
         T avg = T(0);
         T current = T(0);
         float m2 = 0;
         float var = 0;
-        int64_t timestamp = 0;
+        long long timestamp = 0;
     };
 
     template <typename ST>
@@ -52,5 +51,20 @@ namespace modular::filter {
         private:
             int count = 0;
     };
+
+    class StatFloatFilterSensor : public modular::Sensor<Statistics<float>> {
+        public:
+            virtual void measure() override {
+                value  = f.filter(value, readSensorFloat());
+            }
+
+        protected:
+            virtual float readSensorFloat() {
+                return 0;
+            }
+
+        private:
+            StatisticsFilter<float> f;
+    };  
 
 }

@@ -10,9 +10,7 @@ namespace modular {
     {
     public:
         virtual FILTER_OUTPUT filter(FILTER_OUTPUT &val, FILTER_INPUT newValue) = 0;
-        const char* getType() {
-            return typeid(FILTER_OUTPUT).name();
-        };
+
     private:
     };
 }
