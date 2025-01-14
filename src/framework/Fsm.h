@@ -21,51 +21,52 @@
 #define FSM_H
 
 #include <stddef.h>
+namespace modular {
 
-struct State
-{
-  State(void (*on_enter)(), void (*on_state)(), void (*on_exit)());
-  void (*on_enter)();
-  void (*on_state)();
-  void (*on_exit)();
-};
-
-
-class Fsm
-{
-public:
-  Fsm(State* initial_state);
-  ~Fsm();
-
-  void add_transition(State* state_from, State* state_to, int event,
-                      void (*on_transition)());
-
-  void trigger(int event);
-  State* getCurrentState() { return m_current_state; }
-  void run_machine();
-
-private:
-  struct Transition
+  struct State
   {
-    State* state_from;
-    State* state_to;
-    int event;
-    void (*on_transition)();
-
+    State(void (*on_enter)(), void (*on_state)(), void (*on_exit)());
+    void (*on_enter)();
+    void (*on_state)();
+    void (*on_exit)();
   };
 
-  static Transition create_transition(State* state_from, State* state_to,
-                                      int event, void (*on_transition)());
 
-  void make_transition(Transition* transition);
+  class Fsm
+  {
+  public:
+    Fsm(State* initial_state);
+    ~Fsm();
 
-private:
-  State* m_current_state;
-  Transition* m_transitions;
-  int m_num_transitions;
-  bool m_initialized;
-  Transition* _realloc(Transition* arr, size_t oldSize, size_t newSize);
-};
+    void add_transition(State* state_from, State* state_to, int event,
+                        void (*on_transition)());
 
+    void trigger(int event);
+    State* getCurrentState() { return m_current_state; }
+    void run_machine();
 
+  private:
+    struct Transition
+    {
+      State* state_from;
+      State* state_to;
+      int event;
+      void (*on_transition)();
+
+    };
+
+    static Transition create_transition(State* state_from, State* state_to,
+                                        int event, void (*on_transition)());
+
+    void make_transition(Transition* transition);
+
+  private:
+    State* m_current_state;
+    Transition* m_transitions;
+    int m_num_transitions;
+    bool m_initialized;
+    Transition* _realloc(Transition* arr, size_t oldSize, size_t newSize);
+  };
+
+} // namespace modular
 #endif
