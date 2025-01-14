@@ -5,15 +5,15 @@
 #define debug_h
 
 #ifdef DEBUG
-#define debug(...) Serial.print(__VA_ARGS__)
+#define MOD_DEBUG(...) Serial.print(__VA_ARGS__)
 #else
-#define debug(...)
+#define MOD_DEBUG(...)
 #endif
 
 #ifdef DEBUG
-#define debugLn(...); Serial.println(__VA_ARGS__)
+#define MOD_DEBUG_LN(...); Serial.println(__VA_ARGS__)
 #else
-#define debugLn(...)
+#define MOD_DEBUG_LN(...)
 #endif
 
 #endif
