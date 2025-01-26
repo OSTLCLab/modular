@@ -19,12 +19,14 @@
 #include "Fsm.h"
 namespace modular {
 
-  State::State(void (*on_enter)(), void (*on_state)(), void (*on_exit)())
-  : on_enter(on_enter),
+  State::State(int id, void (*on_enter)(), void (*on_state)(), void (*on_exit)())
+  : id(id),
+    on_enter(on_enter),
     on_state(on_state),
     on_exit(on_exit)
   {
   }
+
 
 
   Fsm::Fsm(State* initial_state)
