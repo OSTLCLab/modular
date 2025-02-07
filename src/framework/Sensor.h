@@ -2,6 +2,8 @@
 
 #include "Filter.h"
 #include "TimeManager.h"
+#include "Device.h"
+
 
 namespace modular {
 
@@ -15,7 +17,7 @@ namespace modular {
 
     template <typename VALUE_TYPE>
 
-    class Sensor {
+    class Sensor : Device {
         public:            
             virtual void measure() {
                 value = readSensor();
