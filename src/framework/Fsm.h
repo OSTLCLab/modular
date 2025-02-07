@@ -25,10 +25,11 @@ namespace modular {
 
   struct State
   {
-    State(void (*on_enter)(), void (*on_state)(), void (*on_exit)());
+    State(int id, void (*on_enter)(), void (*on_state)(), void (*on_exit)());
     void (*on_enter)();
     void (*on_state)();
     void (*on_exit)();
+    int id;
   };
 
 
@@ -42,7 +43,7 @@ namespace modular {
                         void (*on_transition)());
 
     void trigger(int event);
-    State* getCurrentState() { return m_current_state; }
+    int get_current_state_id() { return m_current_state->id; } 
     void run_machine();
 
   private:
